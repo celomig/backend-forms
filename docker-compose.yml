@@ -1,0 +1,55 @@
+services:
+  app:
+    image: php:8.1-fpm
+    container_name: laravel_app
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9000:9000"
+    networks:
+      - laravel
+    command: bash -c "
+      apt-get update && apt-get install -y libpq-dev libzip-dev zip unzip && \
+      docker-php-ext-install pdo pdo_mysql && \
+      mkdir -p /var/www/html/storage/framework/{sessions,views,cache/data} && \
+      chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+      chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && \
+      if [ ! -f /var/www/html/.env ]; then cp /var/www/html/.env.example /var/www/html/.env && php artisan key:generate; fi && \
+      php-fpm"
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+
+  web:
+    image: nginx:latest
+    container_name: laravel_web
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx:/etc/nginx/conf.d
+    ports:
+      - "8080:80"
+    networks:
+      - laravel
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: laravel_db
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3309:3306"
+    networks:
+      - laravel
+
+networks:
+  laravel:
+
+volumes:
+  dbdata:
