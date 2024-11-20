@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto foi desenvolvido para o backend de um formulário dinâmico, com regras específicas de validação e armazenamento. O objetivo é permitir a criação e o gerenciamento de formulários de forma programática, com dados validados e processados por meio de uma API RESTful.
+Este projeto foi desenvolvido para o backend de um formulário dinâmico, com regras específicas de validação e armazenamento. O objetivo é permitir a criação e o gerenciamento de formulários, com dados validados por meio de uma API RESTful.
 
 ## Tecnologias Utilizadas
 
