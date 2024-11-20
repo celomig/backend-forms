@@ -48,6 +48,8 @@ Foi utilizado o prefixo `v1` para possibilitar o versionamento futuro da API.
 
   *Obs.: O arquivo `forms_definition.json` é utilizado para formatação e validação dos campos.*
 
+  - **GET /formularios/form-1/preenchimentos**
+
 ### Executando os Testes Artisan Laravel
 
 1. Acesse o container Docker:

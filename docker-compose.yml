@@ -16,6 +16,7 @@ services:
       chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
       chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && \
       if [ ! -f /var/www/html/.env ]; then cp /var/www/html/.env.example /var/www/html/.env && php artisan key:generate; fi && \
+      php artisan migrate && \
       php-fpm"
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
