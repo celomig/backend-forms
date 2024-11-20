@@ -14,7 +14,7 @@ Este projeto foi desenvolvido para o backend de um formulário dinâmico, com re
 
 1. Execute o container Docker:
    ```bash
-   docker-compose up -d
+   docker-compose up --build
     ```
 2. A aplicação estará disponível em [http://localhost:8080](http://localhost:8080).
 
@@ -39,8 +39,12 @@ Foi utilizado o prefixo `v1` para possibilitar o versionamento futuro da API.
         "value": "João Maria"
       },
       {
+        "id": "field-1-2",
+        "value": 20
+      },
+      {
         "id": "field-1-3",
-        "value": "Não"
+        "value": "Sim"
       }
     ]
   }
