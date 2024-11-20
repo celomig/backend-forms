@@ -41,7 +41,6 @@ class PreenchimentoFormularioController extends Controller
         return response()->json([
             'form_id' => $form->id,
             'form_name' => $form->name,
-            // 'fields' => $form->fields,
             'fillings' => $fillings,
         ], 200);
     }
@@ -54,7 +53,6 @@ class PreenchimentoFormularioController extends Controller
 
         // Verifica se o formulário existe no JSON
         $formulario = collect($forms)->firstWhere('id', $id_formulario);
-
         if (!$formulario) {
             return response()->json(['error' => 'Formulário não encontrado no JSON.'], 404);
         }
@@ -71,7 +69,9 @@ class PreenchimentoFormularioController extends Controller
             $choices = isset($field['choices']) ? json_encode($field['choices']) : null;
 
             Field::firstOrCreate(
-                ['id' => $field['id']],
+                [
+                    'id' => $field['id']
+                ],
                 [
                     'form_id' => $id_formulario,
                     'label' => $field['label'],
